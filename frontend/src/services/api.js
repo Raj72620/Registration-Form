@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://registration-form-ytgz.onrender.com/api';
 
 export const registerUser = async (userData) => {
   const response = await fetch(`${API_BASE}/users/register`, {
