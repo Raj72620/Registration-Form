@@ -13,7 +13,7 @@
 | **📄 Resume Upload** | Secure file handling (PDF/DOCX) |  
 | **🔒 Data Security** | Encrypted database storage |  
 | **🔄 CRUD Operations** | Create, Read, Update, Delete registrations |  
-| **📊 Admin Dashboard** | View/filter all submissions (Protected routes) |  
+
 
 ---
 
