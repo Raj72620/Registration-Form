@@ -43,11 +43,10 @@ const UserForm = () => {
         formDataToSend.append('resume', resumeFile);
       }
 
-      const response = await fetch('http://localhost:5000/api/users/register', {
-        method: 'POST',
-        body: formDataToSend, // No Content-Type header for FormData
-      });
-
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/register`, {
+  method: 'POST',
+  body: formDataToSend,
+});
       const data = await response.json();
 
       if (!response.ok) {
