@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getUsers, downloadResume } from '../services/app';
 import '../styles/UserList.css';
 
 const UserList = () => {
@@ -9,12 +10,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/users/users');
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch users');
-        }
+  const data = await getUsers();
         
         setUsers(data);
         setLoading(false);
@@ -29,13 +25,7 @@ const UserList = () => {
 
   const downloadResume = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/resume/${userId}`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to download resume');
-      }
-      
-      const blob = await response.blob();
+    const blob = await downloadResume(userId);
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
