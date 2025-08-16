@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { registerUser } from '../services/app';
 import '../styles/UserForm.css';
 
 const UserForm = () => {
@@ -44,9 +43,12 @@ const UserForm = () => {
         formDataToSend.append('resume', resumeFile);
       }
 
-   const response = await registerUser(formDataToSend);
-   const data = response;
+      const response = await fetch('https://registration-form-ytgz.onrender.com/api/users/register', {
+        method: 'POST',
+        body: formDataToSend,
+      });
 
+      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.error || 'Registration failed');

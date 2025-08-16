@@ -1,9 +1,12 @@
 const API_BASE = 'https://registration-form-ytgz.onrender.com/api';
 
-export const registerUser = async (formData) => {
+export const registerUser = async (userData) => {
   const response = await fetch(`${API_BASE}/users/register`, {
     method: 'POST',
-    body: formData, // Note: No Content-Type header for FormData
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
   });
   
   if (!response.ok) {
@@ -23,14 +26,4 @@ export const getUsers = async () => {
   }
   
   return await response.json();
-};
-
-export const downloadResume = async (userId) => {
-  const response = await fetch(`${API_BASE}/users/resume/${userId}`);
-  
-  if (!response.ok) {
-    throw new Error('Failed to download resume');
-  }
-  
-  return await response.blob();
 };

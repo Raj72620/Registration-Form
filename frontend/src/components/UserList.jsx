@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getUsers, downloadResume } from '../services/app';
 import '../styles/UserList.css';
 
 const UserList = () => {
@@ -10,7 +9,12 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-  const data = await getUsers();
+        const response = await fetch('https://registration-form-ytgz.onrender.com/api/users/users');
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch users');
+        }
         
         setUsers(data);
         setLoading(false);
@@ -25,7 +29,13 @@ const UserList = () => {
 
   const downloadResume = async (userId) => {
     try {
-    const blob = await downloadResume(userId);
+      const response = await fetch(`https://registration-form-ytgz.onrender.com/api/users/resume/${userId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to download resume');
+      }
+      
+      const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
