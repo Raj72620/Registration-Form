@@ -7,7 +7,10 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://registration-forrmm.netlify.app', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json()); // Parse JSON requests
 
 // Connect to DB
